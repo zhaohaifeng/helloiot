@@ -1,0 +1,14 @@
+{
+    "name": "iot",
+    "version": "0.1.0",
+    "description": "",
+    "author": "zhaohaifeng",
+    "main": "src/index.js",
+    "ruff": {
+        "dependencies": {
+            "button-gpio": "^2.0.8",
+            "buzzer-gpio": "^0.2.5"
+        },
+        "version": 1
+    }
+}

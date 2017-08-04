@@ -1,3 +1,5 @@
-*/node_modules/
+**/node_modules/
+**/ruff_modules
 .idea/
 *.iml
+.rap
