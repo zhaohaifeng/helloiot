@@ -68,6 +68,13 @@ export const asyncRouterMap = [
     noDropdown: true,
     children: [{ path: 'index', component: Table, name: 'Table', meta: { role: ['admin'] } }]
   },
+  {
+    path: '/mqtt',
+    component: Layout,
+    name: 'mqtt',
+    icon: 'tubiaoleixingzhengchang',
+    children: [{ path: 'server', component: Table, name: 'server端' },{ path: 'client', component: Table, name: 'client端' }]
+  },
 
   { path: '*', redirect: '/404', hidden: true }
 ];

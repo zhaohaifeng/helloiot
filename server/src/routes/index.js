@@ -6,7 +6,6 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   console.log(__dirname)
   res.sendFile(path.join(__dirname,'index.html'))
-  return ;
   // res.render('index', { title: 'Express' });
 });
 
