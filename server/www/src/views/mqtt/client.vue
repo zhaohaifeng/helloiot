@@ -6,7 +6,7 @@
     data() {
       return {}
     },
-    created() {
+    mounted() {
       mqttClient.start();
     },
     methods: {}
