@@ -11,5 +11,5 @@ yarn-debug.log*
 yarn-error.log*
 
 
-server/static
+server/dist
 server/index.html

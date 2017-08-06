@@ -9,9 +9,13 @@ module.exports = {
     // assetsSubDirectory: './static',
 
     // 放到server层目录
-    index: path.resolve(__dirname, '../../index.html'),
-    assetsRoot: path.resolve(__dirname, '../../'),
+    index: path.resolve(__dirname, '../../dist/index.html'),
+    assetsRoot: path.resolve(__dirname, '../../dist'),
     assetsSubDirectory: './static',
+
+    // index: path.resolve(__dirname, '../../index.html'),
+    // assetsRoot: path.resolve(__dirname, '../../'),
+    // assetsSubDirectory: './static',
     assetsPublicPath: './',
     productionSourceMap: true,
     // Gzip off by default as many popular static hosts such as
