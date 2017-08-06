@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 var index = require('./src/routes/index');
 var users = require('./src/routes/users');
 var table = require('./src/routes/table');
+var buttons = require('./src/routes/buttons');
 // var mosca = require('./src/mqttServer');
 
 var app = express();
@@ -39,6 +40,7 @@ app.all("*", function (req, res, next) {
 app.use('/', index);
 app.use('/user', users);
 app.use('/table', table);
+app.use('/btn', buttons);
 
 app.use(function(req, res, next) {
   console.log('mid 404')

@@ -18,6 +18,7 @@ const Err404 = _import('404');
 /* demo page */
 const Form = _import('page/form');
 const Table = _import('table/index');
+const Button = _import('buttons/index');
 
 Vue.use(Router);
 
@@ -58,7 +59,6 @@ export const asyncRouterMap = [
       { path: 'index', component: Form, name: 'Form', icon: 'zonghe' }
     ]
   },
-
   {
     path: '/table',
     component: Layout,
@@ -74,6 +74,15 @@ export const asyncRouterMap = [
     name: 'mqtt',
     icon: 'tubiaoleixingzhengchang',
     children: [{ path: 'server', component: Table, name: 'server端' },{ path: 'client', component: Table, name: 'client端' }]
+  },
+  {
+    path: '/btn',
+    component: Layout,
+    redirect: '/buttons/index',
+    name: 'Button',
+    icon: 'tubiaoleixingzhengchang',
+    noDropdown: true,
+    children: [{ path: 'index', component: Button, name: 'Buttons', meta: { role: ['admin'] } }]
   },
 
   { path: '*', redirect: '/404', hidden: true }
