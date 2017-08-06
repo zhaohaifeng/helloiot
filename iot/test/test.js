@@ -15,6 +15,8 @@ module.exports = {
     'test should run application': function (done) {
         appRunner
             .run(appPath, function () {
+                $('#button').emit('push')
+
                 verify($('#led-r')).turnOn();
             })
             .end(function () {

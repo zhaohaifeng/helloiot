@@ -5,18 +5,21 @@ var mosca = require('mosca')
 var ascoltatore = {
   type: 'redis',
   redis: require('redis'),
-  db: 10,
+  db: 11,
   port: 10090,
   return_buffers: true, // to handle binary payloads
   password: 'OTKFRMG8lhP2',
   host: "121.40.205.19"
 };
 
+// mosca使用websocket的配置参见bin/www,使用attachHttpServer的方式
 var moscaSettings = {
   port: 1883,
   backend: ascoltatore,
+
   persistence: {
-    factory: mosca.persistence.Redis
+    factory: mosca.persistence.Redis,
+    db: 12,
   }
 };
 
@@ -45,6 +48,18 @@ server.on('ready', setup);
 
 server.on('clientConnected', function(client) {
 	console.log('client connected', client.id);		
+});
+
+server.on('subscribed', function(topic, client){
+  console.log('subscribed: ', topic);
+});
+
+server.on('unSubscribed', function(topic, client){
+  console.log('unSubscribed: ', topic);
+})
+
+server.on('clientDisConnected', function(client){
+  console.log('client disConnected: ' + client.id + " userNumber:" + usermap.keys.length);
 });
 
 // fired when a message is received

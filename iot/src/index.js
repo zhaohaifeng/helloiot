@@ -1,20 +1,24 @@
 'use strict';
 
 var interval = null;
+var mqttClient = require('./mqttClient.js');
+console.log('index.mqttClient启动', mqttClient.options.clientId);
 
 $.ready(function (error) {
+
+  mqttClient.start();
+
   var buzzerCount = 0;
   if (error) {
     console.log(error);
     return;
   }
+
   // 在 `#button` 按下时点亮 `#led-r`.
   $('#button').on('push', function () {
     console.log('Button pushed.');
     $('#led-r').turnOn();
-
   });
-
   // 在 `#button` 释放时熄灭 `#led-r`.
   $('#button').on('release', function () {
     console.log('Button released.');
@@ -36,6 +40,8 @@ $.ready(function (error) {
     }
     buzzerCount++;
   });
+
+  sleep(10000);
 });
 
 var buzzerAlert = function (frequency, open) {

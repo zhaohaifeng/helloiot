@@ -1,5 +1,5 @@
 var express = require('express');
-// var mqttServer = require('../mqttServer')
+var mqttServer = require('../mqttServer')
 var router = express.Router();
 
 /* GET users listing. */
@@ -12,9 +12,9 @@ router.get('/', function(req, res, next) {
     retain: true // or true
   };
 
-  // mqttServer.publish(message, function() {
-  //   console.log('done!');
-  // });
+  mqttServer.publish(message, function() {
+    console.log('done!');
+  });
   res.send('respond with a resource2sdfsd');
 
 });

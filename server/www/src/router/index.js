@@ -19,6 +19,7 @@ const Err404 = _import('404');
 const Form = _import('page/form');
 const Table = _import('table/index');
 const Button = _import('buttons/index');
+const MqttClient = _import('mqtt/client');
 
 Vue.use(Router);
 
@@ -73,7 +74,7 @@ export const asyncRouterMap = [
     component: Layout,
     name: 'mqtt',
     icon: 'tubiaoleixingzhengchang',
-    children: [{ path: 'server', component: Table, name: 'server端' },{ path: 'client', component: Table, name: 'client端' }]
+    children: [{ path: 'server', component: Table, name: 'server端' },{ path: 'client', component: MqttClient, name: 'client端' }]
   },
   {
     path: '/btn',

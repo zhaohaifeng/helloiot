@@ -1,7 +1,6 @@
 **/node_modules/
 **/ruff_modules
 .idea/
-*.iml
 .rap
 .DS_Store
 node_modules/
