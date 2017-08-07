@@ -1,7 +1,7 @@
 var mqtt = require('mqtt');
-import store from '@/store/store.js'
+import store from '@/store/index.js'
 var mqttClient = mqtt.connect('mqtt://localhost:3000', {
-  clientId: 'mqttClient' + Math.random()*1000,
+  clientId: 'mqttClient',
   username: 'mc',
   password: 'mcpwd',
   clean: false,
@@ -22,8 +22,8 @@ mqttClient.doPublish = function (topic, msg) {
 
 mqttClient.on('connect', function () {
   console.log('mqtt connected');
-  // mqttClient.subscribe('/channel/'+mqttClient.options.username,{qos:1});
-  mqttClient.subscribe(mqttClient.options.commonTopic);
+  mqttClient.subscribe('/channel/'+mqttClient.options.username,{qos:1});
+  // mqttClient.subscribe(mqttClient.options.commonTopic);
 });
 
 mqttClient.on('reconnect', function () {
@@ -39,6 +39,7 @@ mqttClient.on('message', function (topic, message) {
   // message is Buffer
   console.log('topic:', topic);
   console.log('message:', message.toString());
+  store.commit('pushReceiveMessages', message, {module: 'message'})
 });
 
 mqttClient.on('error', function (error) {
@@ -52,4 +53,4 @@ mqttClient.on('close', function (close) {
 mqttClient.onMsgComes = function (msg) {
 };
 
-module.exports = mqttClient
+export default mqttClient

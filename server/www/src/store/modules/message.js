@@ -4,6 +4,12 @@ const message = {
     sendMessages: []
   },
   mutations: {
+    pushReceiveMessages(state, message){
+      state.receiveMessages.push(message);
+    },
+    pushsendMessages(state, message){
+      state.sendMessages.push(message);
+    }
   }
 };
 
