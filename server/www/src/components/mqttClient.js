@@ -1,4 +1,5 @@
 var mqtt = require('mqtt');
+import store from '@/store/store.js'
 var mqttClient = mqtt.connect('mqtt://localhost:3000', {
   clientId: 'mqttClient' + Math.random()*1000,
   username: 'mc',
