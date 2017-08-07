@@ -5,9 +5,14 @@ const message = {
   },
   mutations: {
     pushReceiveMessages(state, message){
-      state.receiveMessages.push(message);
+      var msgObj = {
+        date : new Date(),
+        text : message.toString()
+      };
+      state.receiveMessages.push(msgObj);
     },
     pushsendMessages(state, message){
+
       state.sendMessages.push(message);
     }
   }

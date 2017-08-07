@@ -19,8 +19,8 @@
         <div class="grid-content bg-purple">
           <h5>已接收</h5>
           <ol>
-            <li v-for="msg in recievedList">
-              {{msg.timeStamp}} - {{ msg.msg }}
+            <li v-for="rcv in recievedList">
+              {{rcv.date.toISOString().substring(0, 23)}} - {{rcv.text}}
             </li>
           </ol>
         </div>
@@ -41,17 +41,7 @@
         sendedList: []
       }
     },
-    mounted() {
-//      bus.$on("MsgCome", function (msg) {
-//          console.log("msg comes", msg);
-//          var msgObj = {
-//            timeStamp: new Date(),
-//            msg :msg
-//          };
-//
-//          this.recievedList.push(msgObj);
-//      })
-    },
+    mounted() {},
     computed: {
       ...Vuex.mapState({
         recievedList: state => state.message.receiveMessages
