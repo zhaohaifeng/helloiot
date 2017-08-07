@@ -7,7 +7,6 @@ var mqttClient = mqtt.connect('mqtt://localhost:3000', {
   clean: false,
   // 重连间隔
   // reconnectPeriod: 5000
-  commonTopic: 'homeiot'
 });
 
 mqttClient.start = function () {
@@ -15,15 +14,14 @@ mqttClient.start = function () {
   // mqttClient.publish('presence', 'Hello Ruff!');
 };
 
-mqttClient.doPublish = function (topic, msg) {
-  console.log("@@@@@in mqtt pulish!!!!");
-  mqttClient.publish(topic, msg);
+mqttClient.doPublish = function (client, msg) {
+  console.log("@@@@@ in mqtt publish!!!!", client, msg);
+  mqttClient.publish('/channel/'+client, msg);
 };
 
 mqttClient.on('connect', function () {
   console.log('mqtt connected');
-  mqttClient.subscribe('/channel/'+mqttClient.options.username,{qos:1});
-  // mqttClient.subscribe(mqttClient.options.commonTopic);
+  // mqttClient.subscribe('/channel/'+mqttClient.options.username,{qos:1});
 });
 
 mqttClient.on('reconnect', function () {

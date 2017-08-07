@@ -1,8 +1,9 @@
 <template>
   <div>
     <div class="block">
-      <el-input v-model="currentMsg.msg" placeholder="msg"></el-input>
-      <el-button type="success" @click="sendMsg(currentMsg.topic, currentMsg.msg)">发送</el-button>
+      <el-input v-model="currentMsg.client" placeholder="msg"></el-input>
+      <el-input v-model="currentMsg.text" placeholder="msg"></el-input>
+      <el-button type="success" @click="sendMsg(currentMsg.client, currentMsg.text)">发送</el-button>
     </div>
     <el-row :gutter="20">
       <el-col :span="12">
@@ -11,6 +12,7 @@
           <ol>
             <li v-for="msg in sendedList">
               {{msg.timeStamp}} - {{ msg.msg }}
+
             </li>
           </ol>
         </div>
@@ -21,6 +23,7 @@
           <ol>
             <li v-for="rcv in recievedList">
               {{rcv.date.toISOString().substring(0, 23)}} - {{rcv.text}}
+
             </li>
           </ol>
         </div>
@@ -41,21 +44,22 @@
         sendedList: []
       }
     },
-    mounted() {},
+    mounted() {
+    },
     computed: {
       ...Vuex.mapState({
         recievedList: state => state.message.receiveMessages
       })
     },
     methods: {
-      sendMsg(topic, msg) {
-//        topic = mqttClient.options.commonTopic;
-//        mqttClient.doPublish(topic, msg);
-//        var msgObj = {
-//          timeStamp: new Date(),
-//          msg: msg
-//        };
-//        this.sendedList.push(msgObj);
+      sendMsg(client, msg) {
+        mqttClient.doPublish(client, msg);
+        var msgObj = {
+          timeStamp: new Date(),
+          client: client,
+          msg: msg
+        };
+        this.sendedList.push(msgObj);
       }
     },
     watch: {
