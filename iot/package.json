@@ -8,7 +8,9 @@
         "dependencies": {
             "button-gpio": "^2.0.8",
             "buzzer-gpio": "^0.2.5",
-            "mqtt": "^0.1.2"
+            "mqtt": "^0.1.2",
+            "ruff-v1-infrared-receiver": "^0.3.7",
+            "ruff-v1-infrared-sender": "^0.3.7"
         },
         "version": 1
     }

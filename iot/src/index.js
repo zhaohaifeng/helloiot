@@ -6,6 +6,7 @@ console.log('index.mqttClient启动', mqttClient.options.clientId);
 
 var emitter = require('./utils/emitter');
 
+var infraredData = null;
 $.ready(function (error) {
 
   emitter.on('message', function(message){
@@ -24,17 +25,31 @@ $.ready(function (error) {
   $('#button').on('push', function () {
     console.log('Button pushed.');
     $('#led-r').turnOn();
+
+    if (infraredData !== null) {
+      console.log('infraredData=', infraredData);
+      $('#infrared-sender').send(infraredData, function (error) {
+        if (error) {
+          console.error(error);
+          return;
+        }
+        console.log('data sent,infraredData', infraredData);
+      });
+    }
   });
   // 在 `#button` 释放时熄灭 `#led-r`.
   $('#button').on('release', function () {
     console.log('Button released.');
     $('#led-r').turnOff();
     buzzer();
+
   });
 
-  setTimeout(function(){
-    console.log('timeOut');
-  },300000)
+  // 红外模块接收消息
+  $('#infrared-receiver').on('data', function (data) {
+    infraredData = data;
+    console.log('infrared-receiver received data', data);
+  });
 });
 
 var buzzerCount = 0;
@@ -65,7 +80,7 @@ var buzzer = function(){
 }
 
 var buzzerAlert = function (frequency, open) {
-  if(open === undefined) {
+  if (open === undefined) {
     open = true;
   }
   clearInterval(interval);
