@@ -1,19 +1,16 @@
 var mqtt = require('mqtt');
 var mqttClient = mqtt.connect('mqtt://localhost:3000', {
-  clientId: 'mqttClient1',
+  clientId: 'mc',
   username: 'mc',
-  password: 'mcpwd'
+  password: 'mcpwd',
+  clean: false
+  // 重连间隔
+  // reconnectPeriod: 5000
 });
-
-
-mqttClient.start = function () {
-  // mqttClient.subscribe('/hello/world')
-  // mqttClient.publish('presence', 'Hello Ruff!');
-};
 
 mqttClient.on('connect', function () {
   console.log('mqtt connected');
-  mqttClient.subscribe('/hello/world');
+  mqttClient.subscribe('/channel/'+mqttClient.options.username);
 });
 
 mqttClient.on('reconnect', function () {

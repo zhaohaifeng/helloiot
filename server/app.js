@@ -9,6 +9,7 @@ var index = require('./src/routes/index');
 var users = require('./src/routes/users');
 var table = require('./src/routes/table');
 var buttons = require('./src/routes/buttons');
+var message = require('./src/routes/message');
 // var mosca = require('./src/mqttServer');
 // var mosca = require("mosca");
 // var broker = new mosca.Server({});
@@ -43,6 +44,7 @@ app.use('/', index);
 app.use('/user', users);
 app.use('/table', table);
 app.use('/btn', buttons);
+app.use('/message', message);
 
 app.use(function(req, res, next) {
   console.log('mid 404')

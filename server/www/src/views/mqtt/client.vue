@@ -7,7 +7,6 @@
       return {}
     },
     mounted() {
-      mqttClient.start();
     },
     methods: {}
   };

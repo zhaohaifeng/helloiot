@@ -6,8 +6,6 @@ console.log('index.mqttClient启动', mqttClient.options.clientId);
 
 $.ready(function (error) {
 
-  mqttClient.start();
-
   var buzzerCount = 0;
   if (error) {
     console.log(error);
@@ -41,7 +39,9 @@ $.ready(function (error) {
     buzzerCount++;
   });
 
-  sleep(10000);
+  setTimeout(function(){
+    console.log('timeOut');
+  },300000)
 });
 
 var buzzerAlert = function (frequency, open) {
