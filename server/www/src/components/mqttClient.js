@@ -3,10 +3,9 @@ var mqttClient = mqtt.connect('mqtt://localhost:3000', {
   clientId: 'mqttClient' + Math.random()*1000,
   username: 'mc',
   password: 'mcpwd',
-  clean: false
+  clean: false,
   // 重连间隔
   // reconnectPeriod: 5000
-  password: 'mcpwd',
   commonTopic: 'homeiot'
 });
 
