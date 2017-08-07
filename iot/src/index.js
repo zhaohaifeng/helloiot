@@ -4,9 +4,17 @@ var interval = null;
 var mqttClient = require('./mqttClient.js');
 console.log('index.mqttClient启动', mqttClient.options.clientId);
 
+var emitter = require('./utils/emitter');
+
 $.ready(function (error) {
 
-  var buzzerCount = 0;
+  emitter.on('message', function(message){
+    console.log('receieve message',message.toString());
+    if(message.toString() === 'buzzer'){
+      messageBuzzer();
+    }
+  });
+
   if (error) {
     console.log(error);
     return;
@@ -21,28 +29,40 @@ $.ready(function (error) {
   $('#button').on('release', function () {
     console.log('Button released.');
     $('#led-r').turnOff();
-
-
-    console.log('buzzerCount', buzzerCount);
-    if (buzzerCount === 0) {
-      buzzerAlert(0);
-    } else if (buzzerCount === 1) {
-      buzzerAlert(500);
-    } else if (buzzerCount === 2) {
-      buzzerAlert(200);
-    } else if (buzzerCount === 3) {
-      buzzerAlert(0,false);
-    } else {
-      buzzerCount = 0;
-      buzzerAlert(0);
-    }
-    buzzerCount++;
+    buzzer();
   });
 
   setTimeout(function(){
     console.log('timeOut');
   },300000)
 });
+
+var buzzerCount = 0;
+
+var messageBuzzer = function() {
+  buzzer();
+};
+
+var buzzer = function(){
+  console.log('Button released.');
+  $('#led-r').turnOff();
+
+
+  console.log('buzzerCount', buzzerCount);
+  if (buzzerCount === 0) {
+    buzzerAlert(0);
+  } else if (buzzerCount === 1) {
+    buzzerAlert(500);
+  } else if (buzzerCount === 2) {
+    buzzerAlert(200);
+  } else if (buzzerCount === 3) {
+    buzzerAlert(0,false);
+  } else {
+    buzzerCount = 0;
+    buzzerAlert(0);
+  }
+  buzzerCount++;
+}
 
 var buzzerAlert = function (frequency, open) {
   if(open === undefined) {

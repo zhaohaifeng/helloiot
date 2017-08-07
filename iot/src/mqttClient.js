@@ -1,4 +1,6 @@
 var mqtt = require('mqtt');
+var emitter = require('./utils/emitter');
+
 var mqttClient = mqtt.connect('mqtt://localhost:1883', {
   clientId: 'deviceMqttClient',
   username: 'deviceMqttClient',
@@ -18,11 +20,12 @@ mqttClient.on('offline', function () {
   console.log('mqtt offline');
 });
 
-
 mqttClient.on('message', function (topic, message) {
   // message is Buffer
   console.log('topic:', topic);
   console.log('message:', message.toString());
+  emitter.emit('message', message)
+
 });
 
 mqttClient.on('error', function (error) {

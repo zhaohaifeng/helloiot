@@ -44,6 +44,9 @@ var authenticate = function (client, username, password, callback) {
 // the username from the topic and verifing it is the same of the authorized user
 var authorizePublish = function (client, topic, payload, callback) {
   let authorized = client.user === topic.split('/')[2];
+  if(!authorized){
+    console.log('subcribe验证：' + client.user + ':' + topic + ' ' + authorized);
+  }
   callback(null, authorized);
 }
 
@@ -51,7 +54,9 @@ var authorizePublish = function (client, topic, payload, callback) {
 // the username from the topic and verifing it is the same of the authorized user
 var authorizeSubscribe = function (client, topic, callback) {
   let authorized = client.user === topic.split('/')[2];
-  console.log('subcribe验证：' + client.user + ':' + topic + ' ' + authorized);
+  if(!authorized){
+    console.log('subcribe验证：' + client.user + ':' + topic + ' ' + authorized);
+  }
   callback(null, authorized);
 }
 
@@ -76,7 +81,7 @@ server.on('clientDisConnected', function (client) {
 
 // fired when a message is received
 server.on('published', function (packet, client) {
-  console.log('@@@@@@@Published', client,packet, packet.topic, packet.payload);
+  console.log('@@@@@@@Published', client, packet.topic, packet.payload);
 });
 
 // fired when the mqtt server is ready

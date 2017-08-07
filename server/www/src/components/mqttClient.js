@@ -9,14 +9,10 @@ var mqttClient = mqtt.connect('mqtt://localhost:3000', {
   // reconnectPeriod: 5000
 });
 
-mqttClient.start = function () {
-  // mqttClient.subscribe('/hello/world')
-  // mqttClient.publish('presence', 'Hello Ruff!');
-};
-
 mqttClient.doPublish = function (client, msg) {
+  console.log('client', client);
   console.log("@@@@@ in mqtt publish!!!!", client, msg);
-  mqttClient.publish('/channel/'+client, msg);
+  mqttClient.publish('/channel/'+client, msg,{qos: 1,retain: true});
 };
 
 mqttClient.on('connect', function () {
@@ -48,7 +44,5 @@ mqttClient.on('close', function (close) {
   console.log('close');
 });
 
-mqttClient.onMsgComes = function (msg) {
-};
 
 export default mqttClient
