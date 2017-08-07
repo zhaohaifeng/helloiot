@@ -5,8 +5,8 @@ var mosca = require('mosca')
 var ascoltatore = {
   type: 'redis',
   redis: require('redis'),
-  db: 9,
   port: 10090,
+  db:9,
   return_buffers: true, // to handle binary payloads
   password: 'OTKFRMG8lhP2',
   host: "121.40.205.19"
@@ -15,12 +15,15 @@ var ascoltatore = {
 // mosca使用websocket的配置参见bin/www,使用attachHttpServer的方式
 // todo redis 持久化又问题，后续改进
 var moscaSettings = {
-  port: 1883
-  // backend: ascoltatore,
-
-  // persistence: {
-  //   factory: mosca.persistence.Redis,
-  // }
+  port: 1883,
+  backend: ascoltatore,
+  persistence: {
+    factory: mosca.persistence.Redis,
+    port: 10090,
+    password: 'OTKFRMG8lhP2',
+    host: "121.40.205.19",
+    db:10
+  }
 };
 
 // Accepts the connection if the username and password are valid

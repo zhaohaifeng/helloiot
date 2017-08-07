@@ -1,6 +1,6 @@
 var mqtt = require('mqtt');
 var mqttClient = mqtt.connect('mqtt://localhost:3000', {
-  clientId: 'mc',
+  clientId: 'mcClientId',
   username: 'mc',
   password: 'mcpwd',
   clean: false
@@ -10,7 +10,7 @@ var mqttClient = mqtt.connect('mqtt://localhost:3000', {
 
 mqttClient.on('connect', function () {
   console.log('mqtt connected');
-  mqttClient.subscribe('/channel/'+mqttClient.options.username);
+  mqttClient.subscribe('/channel/'+mqttClient.options.username,{qos:1});
 });
 
 mqttClient.on('reconnect', function () {
