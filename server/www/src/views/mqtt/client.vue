@@ -1,44 +1,49 @@
 <template>
   <div>
-    <el-row :gutter="20">
+    <el-row :gutter="20" justify="center">
       <el-col :span="12">
         <div class="block">
-          <el-input
-            type="textarea"
-            autosize
-            placeholder="请输入内容"
-            v-model="currentMsg.client">
-          </el-input>
-          <div style="margin: 20px 0;"></div>
-          <el-input
-            type="textarea"
-            placeholder="请输入内容"
-            v-model="currentMsg.text">
-          </el-input>
-          <!--<el-input v-model="currentMsg.client" placeholder="msg"></el-input>-->
-          <!--<el-input v-model="currentMsg.text" placeholder="msg"></el-input>-->
-          <el-button type="success" @click="sendMsg(currentMsg.client, currentMsg.text)">发送</el-button>
+          <div style="margin: 20px;">
+            <el-input
+              type="textarea"
+              autosize
+              placeholder="clientUserName"
+              v-model="currentMsg.client">
+            </el-input>
+            <div style="margin: 20px 0;"></div>
+            <el-input
+              type="textarea"
+              placeholder="message"
+              v-model="currentMsg.text">
+            </el-input>
+          </div>
+          <div style="margin: 20px;">
+            <el-button type="success" @click="sendMsg(currentMsg.client, currentMsg.text)">发送</el-button>
+            <el-button type="default" @click="clear">清空</el-button>
+          </div>
         </div>
       </el-col>
     </el-row>
     <el-row :gutter="20">
       <el-col :span="12">
-        <div class="grid-content bg-purple">
+        <div class="grid-content bg-purple" style="margin: 20px;">
           <h5>已发送</h5>
           <ol>
             <li v-for="msg in sendedList">
               {{msg.timeStamp}} - {{ msg.msg }}
+
 
             </li>
           </ol>
         </div>
       </el-col>
       <el-col :span="12">
-        <div class="grid-content bg-purple">
+        <div class="grid-content bg-purple" style="margin: 20px;">
           <h5>已接收</h5>
           <ol>
             <li v-for="rcv in recievedList">
               {{rcv.date.toISOString().substring(0, 23)}} - {{rcv.text}}
+
 
             </li>
           </ol>
@@ -76,6 +81,12 @@
           msg: msg
         };
         this.sendedList.push(msgObj);
+      },
+      clear() {
+        this.currentMsg = {
+          topic: "",
+          msg: ""
+        }
       }
     },
     watch: {
