@@ -1,10 +1,26 @@
 <template>
   <div>
-    <div class="block">
-      <el-input v-model="currentMsg.client" placeholder="msg"></el-input>
-      <el-input v-model="currentMsg.text" placeholder="msg"></el-input>
-      <el-button type="success" @click="sendMsg(currentMsg.client, currentMsg.text)">发送</el-button>
-    </div>
+    <el-row :gutter="20">
+      <el-col :span="12">
+        <div class="block">
+          <el-input
+            type="textarea"
+            autosize
+            placeholder="请输入内容"
+            v-model="currentMsg.client">
+          </el-input>
+          <div style="margin: 20px 0;"></div>
+          <el-input
+            type="textarea"
+            placeholder="请输入内容"
+            v-model="currentMsg.text">
+          </el-input>
+          <!--<el-input v-model="currentMsg.client" placeholder="msg"></el-input>-->
+          <!--<el-input v-model="currentMsg.text" placeholder="msg"></el-input>-->
+          <el-button type="success" @click="sendMsg(currentMsg.client, currentMsg.text)">发送</el-button>
+        </div>
+      </el-col>
+    </el-row>
     <el-row :gutter="20">
       <el-col :span="12">
         <div class="grid-content bg-purple">

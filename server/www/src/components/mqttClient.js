@@ -17,7 +17,7 @@ mqttClient.doPublish = function (client, msg) {
 
 mqttClient.on('connect', function () {
   console.log('mqtt connected');
-  // mqttClient.subscribe('/channel/'+mqttClient.options.username,{qos:1});
+  mqttClient.subscribe('/channel/'+mqttClient.options.username,{qos:1});
 });
 
 mqttClient.on('reconnect', function () {
