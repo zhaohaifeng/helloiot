@@ -4,12 +4,13 @@ var emitter = require('./utils/emitter');
 var mqttClient = mqtt.connect('mqtt://localhost:1883', {
   clientId: 'deviceMqttClient',
   username: 'deviceMqttClient',
-  password: 'deviceMqttClientPwd'
+  password: 'deviceMqttClientPwd',
+  clean: false
 });
 
 mqttClient.on('connect', function () {
   console.log('mqtt connected');
-  mqttClient.subscribe('/channel/'+mqttClient.options.username);
+  mqttClient.subscribe('/channel/'+mqttClient.options.username,{qos:1});
 });
 
 mqttClient.on('reconnect', function () {

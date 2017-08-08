@@ -43,10 +43,11 @@ var authenticate = function (client, username, password, callback) {
 // In this case the client authorized as alice can publish to /users/alice taking
 // the username from the topic and verifing it is the same of the authorized user
 var authorizePublish = function (client, topic, payload, callback) {
-  let authorized = client.user === topic.split('/')[2];
-  if(!authorized){
-    console.log('subcribe验证：' + client.user + ':' + topic + ' ' + authorized);
-  }
+  authorized = true;
+  // let authorized = client.user === topic.split('/')[2];
+  // if(!authorized){
+  //   console.log('subcribe验证：' + client.user + ':' + topic + ' ' + authorized);
+  // }
   callback(null, authorized);
 }
 
@@ -81,7 +82,7 @@ server.on('clientDisConnected', function (client) {
 
 // fired when a message is received
 server.on('published', function (packet, client) {
-  console.log('@@@@@@@Published', client, packet.topic, packet.payload);
+  // console.log('@@@@@@@Published', client, packet.topic, packet.payload);
 });
 
 // fired when the mqtt server is ready

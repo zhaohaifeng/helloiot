@@ -12,7 +12,7 @@ var mqttClient = mqtt.connect('mqtt://localhost:3000', {
 mqttClient.doPublish = function (client, msg) {
   console.log('client', client);
   console.log("@@@@@ in mqtt publish!!!!", client, msg);
-  mqttClient.publish('/channel/'+client, msg,{qos: 1,retain: true});
+  mqttClient.publish('/channel/'+client, msg,{qos: 1});
 };
 
 mqttClient.on('connect', function () {
