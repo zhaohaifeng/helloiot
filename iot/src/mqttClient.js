@@ -1,7 +1,7 @@
 var mqtt = require('mqtt');
 var emitter = require('./utils/emitter');
 
-var mqttClient = mqtt.connect('mqtt://localhost:1883', {
+var mqttClient = mqtt.connect('mqtt://192.168.199.161:1883', {
   clientId: 'deviceMqttClient',
   username: 'deviceMqttClient',
   password: 'deviceMqttClientPwd',

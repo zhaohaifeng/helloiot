@@ -27,13 +27,15 @@ $.ready(function (error) {
     $('#led-r').turnOn();
 
     if (infraredData !== null) {
-      console.log('infraredData=', infraredData);
+      console.log('infraredData=', infraredData[0]);
+      // console.log('infraredData=', $('#infrared-sender'));
       $('#infrared-sender').send(infraredData, function (error) {
         if (error) {
           console.error(error);
           return;
         }
-        console.log('data sent,infraredData', infraredData);
+        console.error('error', error);
+        console.log('data sent,infraredData', infraredData[0]);
       });
     }
   });
@@ -41,14 +43,14 @@ $.ready(function (error) {
   $('#button').on('release', function () {
     console.log('Button released.');
     $('#led-r').turnOff();
-    buzzer();
+    // buzzer();
 
   });
 
   // 红外模块接收消息
   $('#infrared-receiver').on('data', function (data) {
     infraredData = data;
-    console.log('infrared-receiver received data', data);
+    console.log('infrared-receiver received data', data[0]);
   });
 });
 
